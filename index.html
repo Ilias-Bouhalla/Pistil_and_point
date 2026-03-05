@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pistil & Point — Créations Textiles & Florales</title>
+  <meta name="description"
+    content="Pistil & Point par Ili — Broderies artisanales et tapis tuftés uniques. Fait main en France avec amour." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&family=Silkscreen:wght@400;700&display=swap"
+    rel="stylesheet" />
+
+  <script type="module" crossorigin src="./assets/index-a6p-vqlQ.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BhWQ6ygR.css">
+</head>
+
+<body>
+  <!-- Cursor follower -->
+  <div class="cursor-follower" id="cursorFollower"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- Grain overlay -->
+  <div class="grain-overlay"></div>
+
+  <!-- Pixel flowers background canvas -->
+  <canvas class="pixel-flowers-canvas" id="pixelFlowersCanvas"></canvas>
+
+  <!-- Falling petals canvas -->
+  <canvas class="petals-canvas" id="petalsCanvas"></canvas>
+
+  <!-- Top header brand -->
+  <a href="#hero" class="top-brand" id="topBrand">
+    <span class="top-brand-icon">🌸</span>
+    <span class="top-brand-name">Pistil & Point</span>
+  </a>
+
+  <!-- Language toggle -->
+  <button class="lang-toggle" id="langToggle" data-magnetic>
+    <span class="lang-flag">🇬🇧</span>
+    <span class="lang-label">EN</span>
+  </button>
+
+  <!-- Loading screen -->
+  <div class="loader" id="loader">
+    <div class="loader-floral">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 0C100 0 120 60 100 100C80 60 100 0 100 0Z" fill="#7a8c6e" opacity="0.3" />
+        <path d="M200 100C200 100 140 120 100 100C140 80 200 100 200 100Z" fill="#7a8c6e" opacity="0.3" />
+        <path d="M100 200C100 200 80 140 100 100C120 140 100 200 100 200Z" fill="#7a8c6e" opacity="0.3" />
+        <path d="M0 100C0 100 60 80 100 100C60 120 0 100 0 100Z" fill="#7a8c6e" opacity="0.3" />
+        <path d="M29 29C29 29 75 50 100 100C50 75 29 29 29 29Z" fill="#c4878a" opacity="0.2" />
+        <path d="M171 29C171 29 125 50 100 100C150 75 171 29 171 29Z" fill="#c4878a" opacity="0.2" />
+        <path d="M171 171C171 171 125 150 100 100C150 125 171 171 171 171Z" fill="#c4878a" opacity="0.2" />
+        <path d="M29 171C29 171 75 150 100 100C50 125 29 171 29 171Z" fill="#c4878a" opacity="0.2" />
+        <circle cx="100" cy="100" r="12" fill="#c4a87c" opacity="0.5" />
+      </svg>
+    </div>
+    <div class="loader-text">
+      <span class="loader-letter" style="--i:0">P</span>
+      <span class="loader-letter" style="--i:1">i</span>
+      <span class="loader-letter" style="--i:2">s</span>
+      <span class="loader-letter" style="--i:3">t</span>
+      <span class="loader-letter" style="--i:4">i</span>
+      <span class="loader-letter" style="--i:5">l</span>
+      <span class="loader-letter" style="--i:6">&nbsp;</span>
+      <span class="loader-letter" style="--i:7">&amp;</span>
+      <span class="loader-letter" style="--i:8">&nbsp;</span>
+      <span class="loader-letter" style="--i:9">P</span>
+      <span class="loader-letter" style="--i:10">o</span>
+      <span class="loader-letter" style="--i:11">i</span>
+      <span class="loader-letter" style="--i:12">n</span>
+      <span class="loader-letter" style="--i:13">t</span>
+    </div>
+    <div class="loader-bar">
+      <div class="loader-bar-fill" id="loaderBarFill"></div>
+    </div>
+    <p class="loader-tagline" data-i18n="loader_tagline">Fait main avec amour 🌸</p>
+  </div>
+
+  <!-- Main content -->
+  <main class="main-content" id="mainContent">
+
+    <!-- Hero Section — Big brand splash -->
+    <section class="hero" id="hero">
+      <div class="hero-brand-wrapper">
+        <!-- Decorative pixel flowers around the title -->
+        <div class="hero-pixel-flower hpf-1">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="0" width="8" height="4" fill="currentColor" opacity="0.6" />
+            <rect x="4" y="4" width="4" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="16" y="4" width="4" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="0" y="8" width="4" height="4" fill="currentColor" opacity="0.4" />
+            <rect x="20" y="8" width="4" height="4" fill="currentColor" opacity="0.4" />
+            <rect x="8" y="8" width="8" height="8" fill="currentColor" opacity="0.3" />
+            <rect x="4" y="16" width="4" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="16" y="16" width="4" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="8" y="20" width="8" height="4" fill="currentColor" opacity="0.6" />
+          </svg>
+        </div>
+        <div class="hero-pixel-flower hpf-2">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="0" width="8" height="4" fill="currentColor" opacity="0.6" />
+            <rect x="4" y="4" width="4" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="16" y="4" width="4" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="0" y="8" width="4" height="4" fill="currentColor" opacity="0.4" />
+            <rect x="20" y="8" width="4" height="4" fill="currentColor" opacity="0.4" />
+            <rect x="8" y="8" width="8" height="8" fill="currentColor" opacity="0.3" />
+            <rect x="4" y="16" width="4" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="16" y="16" width="4" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="8" y="20" width="8" height="4" fill="currentColor" opacity="0.6" />
+          </svg>
+        </div>
+        <div class="hero-pixel-flower hpf-3">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="0" width="4" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="4" y="4" width="4" height="4" fill="currentColor" opacity="0.4" />
+            <rect x="12" y="4" width="4" height="4" fill="currentColor" opacity="0.4" />
+            <rect x="0" y="8" width="4" height="4" fill="currentColor" opacity="0.3" />
+            <rect x="16" y="8" width="4" height="4" fill="currentColor" opacity="0.3" />
+            <rect x="8" y="8" width="4" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="4" y="12" width="4" height="4" fill="currentColor" opacity="0.4" />
+            <rect x="12" y="12" width="4" height="4" fill="currentColor" opacity="0.4" />
+            <rect x="8" y="16" width="4" height="4" fill="currentColor" opacity="0.5" />
+          </svg>
+        </div>
+        <div class="hero-pixel-flower hpf-4">
+          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="0" width="4" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="4" y="4" width="4" height="4" fill="currentColor" opacity="0.4" />
+            <rect x="12" y="4" width="4" height="4" fill="currentColor" opacity="0.4" />
+            <rect x="0" y="8" width="4" height="4" fill="currentColor" opacity="0.3" />
+            <rect x="16" y="8" width="4" height="4" fill="currentColor" opacity="0.3" />
+            <rect x="8" y="8" width="4" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="4" y="12" width="4" height="4" fill="currentColor" opacity="0.4" />
+            <rect x="12" y="12" width="4" height="4" fill="currentColor" opacity="0.4" />
+            <rect x="8" y="16" width="4" height="4" fill="currentColor" opacity="0.5" />
+          </svg>
+        </div>
+        <div class="hero-pixel-flower hpf-5">
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="0" width="8" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="0" y="4" width="4" height="8" fill="currentColor" opacity="0.4" />
+            <rect x="12" y="4" width="4" height="8" fill="currentColor" opacity="0.4" />
+            <rect x="4" y="4" width="8" height="8" fill="currentColor" opacity="0.2" />
+            <rect x="4" y="12" width="8" height="4" fill="currentColor" opacity="0.5" />
+          </svg>
+        </div>
+        <div class="hero-pixel-flower hpf-6">
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="0" width="8" height="4" fill="currentColor" opacity="0.5" />
+            <rect x="0" y="4" width="4" height="8" fill="currentColor" opacity="0.4" />
+            <rect x="12" y="4" width="4" height="8" fill="currentColor" opacity="0.4" />
+            <rect x="4" y="4" width="8" height="8" fill="currentColor" opacity="0.2" />
+            <rect x="4" y="12" width="8" height="4" fill="currentColor" opacity="0.5" />
+          </svg>
+        </div>
+
+        <h1 class="hero-title" id="heroTitle">
+          <span class="title-line" data-animate="split">Pistil & Point</span>
+        </h1>
+        <p class="hero-subtitle" data-animate="fade-up" data-i18n="hero_subtitle">CASQUETTES & TAPIS ARTISANAUX • FRANCE
+        </p>
+        <p class="hero-tagline" data-animate="fade-up" data-i18n="hero_tagline">Entre broderie fine et tufting vibrant,
+          chaque pièce est une œuvre unique pour votre style et votre intérieur.</p>
+        <div class="hero-cta-group" data-animate="fade-up">
+          <a href="#caps" class="hero-cta hero-cta-primary" data-magnetic>
+            <span data-i18n="hero_cta_discover">Découvrir</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M8 3V13M8 13L4 9M8 13L12 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+          <a href="https://www.vinted.fr/member/3134572034" target="_blank" rel="noopener"
+            class="hero-cta hero-cta-secondary" data-magnetic>
+            <span data-i18n="hero_cta_shop">Acheter sur Vinted</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero-scroll-indicator">
+        <div class="scroll-line"></div>
+        <span data-i18n="hero_scroll">Défiler</span>
+      </div>
+
+      <!-- Floating organic blobs -->
+      <div class="floating-shape shape-1"></div>
+      <div class="floating-shape shape-2"></div>
+      <div class="floating-shape shape-3"></div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+      <div class="floral-corner-tl">
+        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 Q30 80 10 150" stroke="#7a8c6e" stroke-width="0.8" fill="none" />
+          <path d="M10 150 Q-5 120 20 100" stroke="#7a8c6e" stroke-width="0.5" fill="none" />
+          <path d="M10 150 Q25 120 15 95" stroke="#7a8c6e" stroke-width="0.5" fill="none" />
+          <path d="M0 0 Q80 30 150 10" stroke="#c4878a" stroke-width="0.8" fill="none" />
+          <path d="M50 5 Q55 25 45 35" stroke="#7a8c6e" stroke-width="0.5" fill="none" />
+          <path d="M50 5 Q60 20 70 25" stroke="#7a8c6e" stroke-width="0.5" fill="none" />
+          <circle cx="8" cy="80" r="4" fill="#c4878a" opacity="0.1" />
+          <circle cx="80" cy="8" r="3" fill="#7a8c6e" opacity="0.1" />
+          <circle cx="40" cy="40" r="2" fill="#c4a87c" opacity="0.15" />
+          <path d="M25 60 Q30 55 28 48 Q32 55 38 57 Q32 58 28 65 Q27 58 22 57Z" fill="#c4878a" opacity="0.08" />
+          <path d="M70 30 Q73 25 72 20 Q75 25 80 26 Q75 28 72 33 Q71 28 68 26Z" fill="#7a8c6e" opacity="0.08" />
+        </svg>
+      </div>
+
+      <div class="section-container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-label" data-i18n="about_label">À PROPOS</span>
+          <h2 class="section-title" data-i18n="about_title_html">Salut, moi c'est Ili 🌷<br />l'artiste
+            derrière<br /><em>Pistil & Point</em>.</h2>
+        </div>
+        <div class="about-content" data-animate="fade-up">
+          <div class="about-text">
+            <p data-i18n="about_p1">Je suis Ili, j'ai 21 ans et je vis en France. Passionnée par le textile, j'ai créé
+              Pistil & Point pour explorer deux univers complémentaires : la broderie minutieuse sur casquettes et le
+              tufting vibrant de tapis artistiques.</p>
+            <p data-i18n="about_p2">Qu'il s'agisse d'un bouquet à porter ou d'un jardin de laine pour votre sol, chaque
+              création est faite main. Mon but est de transformer des objets du quotidien en pièces de collection
+              organiques et poétiques.</p>
+            <p data-i18n="about_p3">Retrouvez mes drops sur Vinted et suivez les coulisses de l'atelier sur mes réseaux
+              ! ✨</p>
+
+            <!-- Social Links -->
+            <div class="about-socials">
+              <a href="https://www.instagram.com/flowercap___/" target="_blank" rel="noopener"
+                class="about-social-link ig" data-magnetic>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+                Instagram
+              </a>
+              <a href="https://www.tiktok.com/@flowercap_" target="_blank" rel="noopener"
+                class="about-social-link tiktok" data-magnetic>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.71a8.24 8.24 0 004.76 1.5v-3.4a4.85 4.85 0 01-1-.12z" />
+                </svg>
+                TikTok
+              </a>
+              <a href="https://www.youtube.com/" target="_blank" rel="noopener" class="about-social-link youtube"
+                data-magnetic>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+                YouTube
+              </a>
+              <a href="https://www.vinted.fr/member/3134572034" target="_blank" rel="noopener"
+                class="about-social-link vinted" data-magnetic>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M15.94 3l-1.47 1.55c-.49.5-.91 1.38-1.16 2.39L9.7 21h-2l-.34-1.33c-.15-.56-.21-1.14-.06-1.7L10.7 6.4c.25-1 .67-1.89 1.16-2.39L13.33 3h2.61zM8.57 3L7.1 4.55c-.49.5-.91 1.38-1.16 2.39L2.33 21H.33L0 19.67c-.15-.56-.06-1.14.09-1.7L3.33 6.4c.25-1 .67-1.89 1.16-2.39L5.96 3h2.61zM23.31 3l-1.47 1.55c-.49.5-.91 1.38-1.16 2.39L17.07 21h-2l-.34-1.33c-.15-.56-.06-1.14.09-1.7l3.24-11.57c.25-1 .67-1.89 1.16-2.39L20.7 3h2.61z" />
+                </svg>
+                Vinted
+              </a>
+            </div>
+          </div>
+          <div class="about-stats">
+            <div class="stat-item">
+              <span class="stat-number" data-count="32">0</span>
+              <span class="stat-label" data-i18n="stat_creations">Pièces Uniques</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" data-count="85">0</span>
+              <span class="stat-label" data-i18n="stat_clients">Clients Satisfaits</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" data-count="2">0</span>
+              <span class="stat-label" data-i18n="stat_techniques">Techniques Artisanales</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="floral-corner-br">
+        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 Q30 80 10 150" stroke="#7a8c6e" stroke-width="0.8" fill="none" />
+          <path d="M0 0 Q80 30 150 10" stroke="#c4878a" stroke-width="0.8" fill="none" />
+          <circle cx="40" cy="40" r="2" fill="#c4a87c" opacity="0.15" />
+          <path d="M25 60 Q30 55 28 48 Q32 55 38 57 Q32 58 28 65 Q27 58 22 57Z" fill="#c4878a" opacity="0.08" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- Caps Gallery Section -->
+    <section class="section projects-section" id="caps">
+      <div class="section-container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-label" data-i18n="nav_caps">CASQUETTES</span>
+          <h2 class="section-title" data-i18n="gallery_caps_title">La Collection <em>Casquettes</em></h2>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card" data-animate="fade-up">
+            <div class="project-card-image">
+              <img src="./caps/cap_blue_front.png" alt="Sky Blue Floral Cap" />
+              <div class="project-card-overlay">
+                <span class="project-card-view" data-i18n="gallery_view">Voir les détails →</span>
+              </div>
+            </div>
+            <div class="project-card-info">
+              <h3 class="project-card-title">Sky Blue Dream</h3>
+              <span class="project-card-category" data-i18n="proj_cap1_cat">Hortensia Bleu • Broderie Main</span>
+            </div>
+          </article>
+          <article class="project-card" data-animate="fade-up">
+            <div class="project-card-image">
+              <img src="./caps/cap_pink_front.png" alt="Rose Pink Floral Cap" />
+              <div class="project-card-overlay">
+                <span class="project-card-view" data-i18n="gallery_view">Voir les détails →</span>
+              </div>
+            </div>
+            <div class="project-card-info">
+              <h3 class="project-card-title">Pink Rose</h3>
+              <span class="project-card-category" data-i18n="proj_cap2_cat">Rose Sauvage • Dentelle</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rugs Gallery Section -->
+    <section class="section projects-section" id="rugs" style="padding-top: 0;">
+      <div class="section-container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-label" data-i18n="nav_rugs">TAPIS</span>
+          <h2 class="section-title" data-i18n="gallery_rugs_title">Le Studio <em>Tapis</em></h2>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card" data-animate="fade-up">
+            <div class="project-card-image">
+              <img src="./carpets/carpet1.png" alt="Floral Tufted Carpet" />
+              <div class="project-card-overlay">
+                <span class="project-card-view" data-i18n="gallery_view">Voir les détails →</span>
+              </div>
+            </div>
+            <div class="project-card-info">
+              <h3 class="project-card-title">Poppy Palace</h3>
+              <span class="project-card-category" data-i18n="proj_rug1_cat">Coquelicots • Tapis Tufté</span>
+            </div>
+          </article>
+          <article class="project-card" data-animate="fade-up">
+            <div class="project-card-image">
+              <img src="./carpets/carpet2.png" alt="Flower Shaped Rug" />
+              <div class="project-card-overlay">
+                <span class="project-card-view" data-i18n="gallery_view">Voir les détails →</span>
+              </div>
+            </div>
+            <div class="project-card-info">
+              <h3 class="project-card-title">Pink Peony</h3>
+              <span class="project-card-category" data-i18n="proj_rug2_cat">Pivoine Royale • Forme Découpée</span>
+            </div>
+          </article>
+          <article class="project-card" data-animate="fade-up">
+            <div class="project-card-image">
+              <img src="./carpets/carpet3.png" alt="Botanical Rug" />
+              <div class="project-card-overlay">
+                <span class="project-card-view" data-i18n="gallery_view">Voir les détails →</span>
+              </div>
+            </div>
+            <div class="project-card-info">
+              <h3 class="project-card-title">Botanical Bliss</h3>
+              <span class="project-card-category" data-i18n="proj_rug3_cat">Feuillage Tropical • Texture Laine</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D Product Viewer Section -->
+    <section class="section product-viewer-section" id="product-viewer">
+      <div class="floral-corner-tl">
+        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 Q30 80 10 150" stroke="#7a8c6e" stroke-width="0.8" fill="none" />
+          <path d="M0 0 Q80 30 150 10" stroke="#c4878a" stroke-width="0.8" fill="none" />
+          <circle cx="40" cy="40" r="2" fill="#c4a87c" opacity="0.15" />
+          <path d="M25 60 Q30 55 28 48 Q32 55 38 57 Q32 58 28 65 Q27 58 22 57Z" fill="#c4878a" opacity="0.08" />
+        </svg>
+      </div>
+
+      <div class="section-container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-label" data-i18n="product_label">PRODUIT</span>
+          <h2 class="section-title" data-i18n="product_title_html">Explorez la<br /><em>collection</em>. 🌿</h2>
+        </div>
+
+        <div class="product-viewer-wrapper" data-animate="fade-up">
+          <div class="product-selector">
+            <button class="product-thumb active" data-product="blue" id="thumbBlue">
+              <img src="./caps/cap_blue_front.png" alt="Blue Floral Cap" />
+              <span class="thumb-label">Sky Blue</span>
+            </button>
+            <button class="product-thumb" data-product="white" id="thumbWhite">
+              <img src="./caps/cap_white_front.png" alt="White Floral Cap" />
+              <span class="thumb-label">Pearl White</span>
+            </button>
+            <button class="product-thumb" data-product="pink" id="thumbPink">
+              <img src="./caps/cap_pink_front.png" alt="Pink Floral Cap" />
+              <span class="thumb-label">Rose Pink</span>
+            </button>
+          </div>
+
+          <div class="viewer-container" id="viewer3D">
+            <div class="viewer-drag-hint" id="viewerDragHint">
+              <div class="drag-hint-icon">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M6 16H26M6 16L11 11M6 16L11 21M26 16L21 11M26 16L21 21" stroke="currentColor"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <span data-i18n="product_drag">Glisser pour tourner • Scroll pour zoomer</span>
+            </div>
+          </div>
+
+          <div class="product-info-panel" id="productInfoPanel">
+            <h3 class="product-name" id="productName">Floral Cap — Sky Blue</h3>
+            <p class="product-description" id="productDescription" data-i18n="product_desc">
+              Casquette New Era ornée de délicates fleurs d'hortensia bleues,
+              broderie de dentelle blanche et perles. Chaque pièce est unique,
+              faite avec amour et attention aux détails.
+            </p>
+            <div class="product-details">
+              <div class="detail-item">
+                <span class="detail-label" data-i18n="product_material">Matière</span>
+                <span class="detail-value">100% Laine + Dentelle</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Style</span>
+                <span class="detail-value">New Era 59FIFTY</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label" data-i18n="product_craft">Fabrication</span>
+                <span class="detail-value" data-i18n="product_handmade">Fait main 🌸</span>
+              </div>
+            </div>
+            <a href="https://www.vinted.fr/member/3134572034" target="_blank" rel="noopener" class="product-buy-btn"
+              data-magnetic data-i18n="product_buy">
+              Acheter sur Vinted →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="floral-corner-br">
+        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 Q30 80 10 150" stroke="#7a8c6e" stroke-width="0.8" fill="none" />
+          <path d="M0 0 Q80 30 150 10" stroke="#c4878a" stroke-width="0.8" fill="none" />
+          <circle cx="40" cy="40" r="2" fill="#c4a87c" opacity="0.15" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section journal-section" id="process">
+      <div class="floral-corner-tl">
+        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 Q30 80 10 150" stroke="#7a8c6e" stroke-width="0.8" fill="none" />
+          <path d="M0 0 Q80 30 150 10" stroke="#c4878a" stroke-width="0.8" fill="none" />
+          <circle cx="40" cy="40" r="2" fill="#c4a87c" opacity="0.15" />
+        </svg>
+      </div>
+      <div class="section-container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-label" data-i18n="process_label">MON PROCESSUS</span>
+          <h2 class="section-title" data-i18n="process_title_html">Comment chaque<br />casquette<br /><em>éclot</em>. 🌱
+          </h2>
+        </div>
+        <div class="journal-list">
+          <a href="#" class="journal-item" data-animate="fade-up">
+            <div class="journal-item-number">01</div>
+            <div class="journal-item-content">
+              <h3 class="journal-item-title" data-i18n="process_step1_title">Choisir la Base</h3>
+              <p class="journal-item-excerpt" data-i18n="process_step1_text">Tout commence par le choix de la casquette
+                parfaite — couleur, taille et tissu qui mettront en valeur le design floral imaginé.</p>
+            </div>
+            <div class="journal-item-date" data-i18n="process_step1_label">Sélection</div>
+            <div class="journal-item-arrow">🌿</div>
+          </a>
+          <a href="#" class="journal-item" data-animate="fade-up">
+            <div class="journal-item-number">02</div>
+            <div class="journal-item-content">
+              <h3 class="journal-item-title" data-i18n="process_step2_title">Dessiner la Composition</h3>
+              <p class="journal-item-excerpt" data-i18n="process_step2_text">Je dessine et planifie chaque composition
+                florale, en choisissant la combinaison parfaite de fleurs, motifs de dentelle et placements de perles.
+              </p>
+            </div>
+            <div class="journal-item-date" data-i18n="process_step2_label">Design</div>
+            <div class="journal-item-arrow">🌸</div>
+          </a>
+          <a href="#" class="journal-item" data-animate="fade-up">
+            <div class="journal-item-number">03</div>
+            <div class="journal-item-content">
+              <h3 class="journal-item-title" data-i18n="process_step3_title">Broder avec Amour</h3>
+              <p class="journal-item-excerpt" data-i18n="process_step3_text">La magie opère point par point — broderie à
+                la main, fixation des appliqués en dentelle et ajout des perles pour donner vie à la casquette.</p>
+            </div>
+            <div class="journal-item-date" data-i18n="process_step3_label">Création</div>
+            <div class="journal-item-arrow">🌺</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+      <div class="floral-decoration" style="top: 20px; right: 40px; width: 200px; height: 200px; opacity: 0.04;">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 20 Q110 60 100 100 Q90 60 100 20Z" stroke="#a8b89c" stroke-width="1" fill="none" />
+          <path d="M180 100 Q140 110 100 100 Q140 90 180 100Z" stroke="#a8b89c" stroke-width="1" fill="none" />
+          <path d="M100 180 Q90 140 100 100 Q110 140 100 180Z" stroke="#e8b4b6" stroke-width="1" fill="none" />
+          <path d="M20 100 Q60 90 100 100 Q60 110 20 100Z" stroke="#e8b4b6" stroke-width="1" fill="none" />
+          <circle cx="100" cy="100" r="6" fill="#c4a87c" opacity="0.15" />
+        </svg>
+      </div>
+      <div class="floral-decoration" style="bottom: 40px; left: 60px; width: 150px; height: 150px; opacity: 0.03;">
+        <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M75 10 Q85 45 75 75 Q65 45 75 10Z" stroke="#a8b89c" stroke-width="0.8" fill="none" />
+          <path d="M140 75 Q105 85 75 75 Q105 65 140 75Z" stroke="#a8b89c" stroke-width="0.8" fill="none" />
+          <circle cx="75" cy="75" r="4" fill="#e8b4b6" opacity="0.1" />
+        </svg>
+      </div>
+
+      <div class="section-container">
+        <div class="contact-content" data-animate="fade-up">
+          <span class="section-label" data-i18n="contact_label">CONTACT</span>
+          <h2 class="contact-title" data-i18n="contact_title_html">Créons quelque<br />chose
+            de<br /><em>magnifique</em>. 🌸</h2>
+          <p class="contact-subtitle" data-i18n="contact_subtitle">Envie d'une création personnalisée ? Un projet de
+            tapis ou de casquette ? Contactez-moi et faisons éclore votre idée !</p>
+          <a href="mailto:contact.pistilpoint@gmail.com" class="contact-email"
+            data-magnetic>contact.pistilpoint@gmail.com</a>
+          <div class="contact-socials">
+            <a href="https://www.instagram.com/flowercap___/" target="_blank" rel="noopener" class="social-link"
+              data-magnetic>Instagram</a>
+            <a href="https://www.tiktok.com/@flowercap_" target="_blank" rel="noopener" class="social-link"
+              data-magnetic>TikTok</a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener" class="social-link"
+              data-magnetic>YouTube</a>
+            <a href="https://www.vinted.fr/member/3134572034" target="_blank" rel="noopener" class="social-link"
+              data-magnetic>Vinted</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Navigation Bar -->
+  <nav class="bottom-nav" id="bottomNav">
+    <div class="nav-brand-icon">🌸</div>
+    <div class="nav-links">
+      <a href="#hero" class="nav-link active" data-section="hero" data-i18n="nav_home">ACCUEIL</a>
+      <a href="#about" class="nav-link" data-section="about" data-i18n="nav_about">À PROPOS</a>
+      <a href="#caps" class="nav-link" data-section="caps" data-i18n="nav_caps">CASQUETTES</a>
+      <a href="#rugs" class="nav-link" data-section="rugs" data-i18n="nav_rugs">TAPIS</a>
+      <a href="#process" class="nav-link" data-section="process" data-i18n="nav_process">PROCESSUS</a>
+    </div>
+    <a href="#contact" class="nav-contact" data-section="contact">
+      CONTACT <span>+</span>
+    </a>
+  </nav>
+
+</body>
+
+</html>
