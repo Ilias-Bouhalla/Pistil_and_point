@@ -12,24 +12,26 @@ interface CapProduct {
     modelUrl: string;
 }
 
+const basePath = import.meta.env.BASE_URL;
+
 const PRODUCTS: Record<string, CapProduct> = {
     blue: {
         name: 'Floral Cap — Sky Blue',
         description:
             'Handcrafted New Era fitted cap adorned with delicate blue hydrangea flowers, intricate white lace embroidery, and pearl bead accents. Each piece is uniquely made with love and attention to detail.',
-        modelUrl: './cap3d1.glb',
+        modelUrl: `${basePath}cap3d1.glb`,
     },
     white: {
         name: 'Floral Cap — Pearl White',
         description:
             'Elegant gray New Era cap embellished with pristine white fabric flowers, delicate lace leaves, and lustrous pearl accents. A timeless piece that blends streetwear with haute couture.',
-        modelUrl: './cap3d2.glb',
+        modelUrl: `${basePath}cap3d2.glb`,
     },
     pink: {
         name: 'Floral Cap — Rose Pink',
         description:
             'Bold royal blue New Era LA Dodgers cap decorated with soft pink roses, golden lace embroidery, and pearl details. A stunning fusion of sporty and feminine aesthetics.',
-        modelUrl: './cap3d1.glb',
+        modelUrl: `${basePath}cap3d1.glb`,
     },
 };
 

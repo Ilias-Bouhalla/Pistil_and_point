@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-    base: './', // Indispensable pour GitHub Pages
+    base: '/Pistil_and_point/', // Indispensable pour GitHub Pages
 })
