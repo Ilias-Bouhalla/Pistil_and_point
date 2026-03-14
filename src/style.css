@@ -514,13 +514,8 @@ button {
   line-height: 1;
   letter-spacing: -0.02em;
   margin-bottom: 24px;
-  overflow: hidden;
-  background: linear-gradient(135deg, var(--color-text) 0%, var(--color-sage) 40%, var(--color-rose) 70%, var(--color-sky) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 200%;
-  animation: gradientShift 8s ease-in-out infinite;
+  color: #2c2418;
+  /* Couleur solide forcée */
 }
 
 @keyframes gradientShift {
@@ -539,8 +534,14 @@ button {
 
 .title-line {
   display: block;
-  transform: translateY(110%);
-  transition: transform 1s var(--ease-out-expo);
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1s ease-out;
+}
+
+.title-line:not(.revealed) {
+  opacity: 0;
+  transform: translateY(10px);
 }
 
 .title-line.revealed {
