@@ -4,6 +4,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+import * as TWEEN from '@tweenjs/tween.js';
 
 // --- Product texture data ---
 interface CapProduct {
@@ -27,12 +29,6 @@ const PRODUCTS: Record<string, CapProduct> = {
             'Elegant gray New Era cap embellished with pristine white fabric flowers, delicate lace leaves, and lustrous pearl accents. A timeless piece that blends streetwear with haute couture.',
         modelUrl: `${basePath}cap3d2.glb`,
     },
-    pink: {
-        name: 'Floral Cap — Rose Pink',
-        description:
-            'Bold royal blue New Era LA Dodgers cap decorated with soft pink roses, golden lace embroidery, and pearl details. A stunning fusion of sporty and feminine aesthetics.',
-        modelUrl: `${basePath}cap3d1.glb`,
-    },
 };
 
 // ============================================
@@ -44,6 +40,7 @@ export function init3DViewer(): void {
     const productThumbs = document.querySelectorAll<HTMLButtonElement>('.product-thumb');
     const productNameEl = document.getElementById('productName');
     const productDescEl = document.getElementById('productDescription');
+    const viewerLoading = document.getElementById('viewerLoading');
 
     if (!container) return;
 
@@ -118,12 +115,56 @@ export function init3DViewer(): void {
 
     // Load actual GLTF / GLB model
     const loader = new GLTFLoader();
+    loader.setMeshoptDecoder(MeshoptDecoder);
     let currentModel: THREE.Group | null = null;
     let loadedUrl: string = '';
+    const modelCache: Record<string, THREE.Group> = {};
+    let isTransitioning = false;
 
     function loadModel(url: string) {
-        if (url === loadedUrl) return; // Prevent reloading same model
+        if (url === loadedUrl || isTransitioning) return; // Prevent reloading same model or overriding transition
         loadedUrl = url;
+
+        if (viewerLoading && !modelCache[url]) viewerLoading.classList.remove('hidden');
+
+        const showModel = (model: THREE.Group) => {
+            if (viewerLoading) viewerLoading.classList.add('hidden');
+            if (currentModel) {
+                isTransitioning = true;
+                new TWEEN.Tween(currentModel.scale)
+                    .to({ x: 0.001, y: 0.001, z: 0.001 }, 300)
+                    .easing(TWEEN.Easing.Quadratic.In)
+                    .onComplete(() => {
+                        capGroup.remove(currentModel!);
+                        
+                        model.scale.setScalar(0.001);
+                        capGroup.add(model);
+                        currentModel = model;
+                        const targetScale = model.userData.targetScale || 1;
+
+                        new TWEEN.Tween(model.scale)
+                            .to({ x: targetScale, y: targetScale, z: targetScale }, 600)
+                            .easing(TWEEN.Easing.Elastic.Out)
+                            .onComplete(() => { isTransitioning = false; })
+                            .start();
+                    })
+                    .start();
+            } else {
+                capGroup.add(model);
+                currentModel = model;
+                const targetScale = model.userData.targetScale || 1;
+                model.scale.setScalar(0.001);
+                new TWEEN.Tween(model.scale)
+                    .to({ x: targetScale, y: targetScale, z: targetScale }, 800)
+                    .easing(TWEEN.Easing.Elastic.Out)
+                    .start();
+            }
+        };
+
+        if (modelCache[url]) {
+            showModel(modelCache[url]);
+            return;
+        }
 
         loader.load(
             url,
@@ -136,13 +177,10 @@ export function init3DViewer(): void {
                 const center = box.getCenter(new THREE.Vector3());
 
                 const maxDim = Math.max(size.x, size.y, size.z);
-                const targetSize = 2.5; // adjust to make it look right in the scene
-                if (maxDim > 0) {
-                    const scale = targetSize / maxDim;
-                    model.scale.setScalar(scale);
-                }
-
-                model.position.sub(center.multiplyScalar(model.scale.x));
+                const targetScale = maxDim > 0 ? 2.5 / maxDim : 1;
+                
+                model.userData.targetScale = targetScale;
+                model.position.sub(center.clone().multiplyScalar(targetScale));
                 model.position.y += 0.2; // lifting it slightly above ground zero
 
                 // Ensure meshes can cast and receive shadows
@@ -153,22 +191,52 @@ export function init3DViewer(): void {
                     }
                 });
 
-                if (currentModel) {
-                    capGroup.remove(currentModel);
+                modelCache[url] = model;
+
+                if (loadedUrl === url) {
+                    showModel(model);
                 }
-                currentModel = model;
-                capGroup.add(model);
             },
             undefined,
             (error) => {
                 console.error('An error happened loading the cap model:', error);
-                loadedUrl = ''; // Allow retry
+                if (loadedUrl === url) loadedUrl = ''; // Allow retry
             }
         );
     }
 
     loadModel(PRODUCTS['blue'].modelUrl);
     capGroup.rotation.y = -Math.PI / 4;
+
+    // Preload other models after a short delay
+    setTimeout(() => {
+        Object.values(PRODUCTS).forEach((p) => {
+             if (!modelCache[p.modelUrl] && p.modelUrl !== loadedUrl) {
+                 loader.load(p.modelUrl, (gltf) => {
+                      const model = gltf.scene;
+                      const box = new THREE.Box3().setFromObject(model);
+                      const size = box.getSize(new THREE.Vector3());
+                      const center = box.getCenter(new THREE.Vector3());
+                      
+                      const maxDim = Math.max(size.x, size.y, size.z);
+                      const targetScale = maxDim > 0 ? 2.5 / maxDim : 1;
+                      
+                      model.userData.targetScale = targetScale;
+                      model.position.sub(center.clone().multiplyScalar(targetScale));
+                      model.position.y += 0.2;
+                      
+                      model.traverse((child) => {
+                          if ((child as THREE.Mesh).isMesh) {
+                              child.castShadow = true;
+                              child.receiveShadow = true;
+                          }
+                      });
+                      
+                      modelCache[p.modelUrl] = model;
+                 });
+             }
+        });
+    }, 2500);
 
     // --- OrbitControls ---
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -227,8 +295,11 @@ export function init3DViewer(): void {
     });
 
     // --- Animation loop ---
-    function animate(): void {
+    function animate(time?: number): void {
         requestAnimationFrame(animate);
+        if (time !== undefined) {
+            TWEEN.update(time);
+        }
         controls.update();
         renderer.render(scene, camera);
     }
