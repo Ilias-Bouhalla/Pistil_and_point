@@ -4,7 +4,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
 // --- Product texture data ---
 interface CapProduct {
@@ -117,10 +116,6 @@ export function init3DViewer(): void {
 
     // Load actual GLTF / GLB model
     const loader = new GLTFLoader();
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
-    loader.setDRACOLoader(dracoLoader);
-
     let currentModel: THREE.Group | null = null;
     let loadedUrl: string = '';
 
