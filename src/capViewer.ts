@@ -9,6 +9,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 interface CapProduct {
     name: string;
     description: string;
+    modelUrl: string;
 }
 
 const PRODUCTS: Record<string, CapProduct> = {
@@ -16,16 +17,19 @@ const PRODUCTS: Record<string, CapProduct> = {
         name: 'Floral Cap — Sky Blue',
         description:
             'Handcrafted New Era fitted cap adorned with delicate blue hydrangea flowers, intricate white lace embroidery, and pearl bead accents. Each piece is uniquely made with love and attention to detail.',
+        modelUrl: '/cap3d1.glb',
     },
     white: {
         name: 'Floral Cap — Pearl White',
         description:
             'Elegant gray New Era cap embellished with pristine white fabric flowers, delicate lace leaves, and lustrous pearl accents. A timeless piece that blends streetwear with haute couture.',
+        modelUrl: '/cap3d2.glb',
     },
     pink: {
         name: 'Floral Cap — Rose Pink',
         description:
             'Bold royal blue New Era LA Dodgers cap decorated with soft pink roses, golden lace embroidery, and pearl details. A stunning fusion of sporty and feminine aesthetics.',
+        modelUrl: '/cap3d1.glb',
     },
 };
 
@@ -112,44 +116,57 @@ export function init3DViewer(): void {
 
     // Load actual GLTF / GLB model
     const loader = new GLTFLoader();
-    loader.load(
-        '/cap3d.glb',
-        (gltf) => {
-            const model = gltf.scene;
+    let currentModel: THREE.Group | null = null;
+    let loadedUrl: string = '';
 
-            // Automatically normalize scale and center the model
-            const box = new THREE.Box3().setFromObject(model);
-            const size = box.getSize(new THREE.Vector3());
-            const center = box.getCenter(new THREE.Vector3());
+    function loadModel(url: string) {
+        if (url === loadedUrl) return; // Prevent reloading same model
+        loadedUrl = url;
 
-            const maxDim = Math.max(size.x, size.y, size.z);
-            const targetSize = 2.5; // adjust to make it look right in the scene
-            if (maxDim > 0) {
-                const scale = targetSize / maxDim;
-                model.scale.setScalar(scale);
-            }
+        loader.load(
+            url,
+            (gltf) => {
+                const model = gltf.scene;
 
-            model.position.sub(center.multiplyScalar(model.scale.x));
-            model.position.y += 0.2; // lifting it slightly above ground zero
+                // Automatically normalize scale and center the model
+                const box = new THREE.Box3().setFromObject(model);
+                const size = box.getSize(new THREE.Vector3());
+                const center = box.getCenter(new THREE.Vector3());
 
-            // Ensure meshes can cast and receive shadows
-            model.traverse((child) => {
-                if ((child as THREE.Mesh).isMesh) {
-                    child.castShadow = true;
-                    child.receiveShadow = true;
+                const maxDim = Math.max(size.x, size.y, size.z);
+                const targetSize = 2.5; // adjust to make it look right in the scene
+                if (maxDim > 0) {
+                    const scale = targetSize / maxDim;
+                    model.scale.setScalar(scale);
                 }
-            });
 
-            capGroup.add(model);
+                model.position.sub(center.multiplyScalar(model.scale.x));
+                model.position.y += 0.2; // lifting it slightly above ground zero
 
-            // Initial positioning for the group
-            capGroup.rotation.y = -Math.PI / 4;
-        },
-        undefined,
-        (error) => {
-            console.error('An error happened loading the cap model:', error);
-        }
-    );
+                // Ensure meshes can cast and receive shadows
+                model.traverse((child) => {
+                    if ((child as THREE.Mesh).isMesh) {
+                        child.castShadow = true;
+                        child.receiveShadow = true;
+                    }
+                });
+
+                if (currentModel) {
+                    capGroup.remove(currentModel);
+                }
+                currentModel = model;
+                capGroup.add(model);
+            },
+            undefined,
+            (error) => {
+                console.error('An error happened loading the cap model:', error);
+                loadedUrl = ''; // Allow retry
+            }
+        );
+    }
+
+    loadModel(PRODUCTS['blue'].modelUrl);
+    capGroup.rotation.y = -Math.PI / 4;
 
     // --- OrbitControls ---
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -182,7 +199,7 @@ export function init3DViewer(): void {
 
     controls.addEventListener('start', pauseAutoRotate);
 
-    // --- Switch product (texts only for now since we only have 1 model) ---
+    // --- Switch product ---
     function switchProduct(key: string): void {
         const product = PRODUCTS[key];
         if (!product) return;
@@ -195,6 +212,8 @@ export function init3DViewer(): void {
         productThumbs.forEach((thumb) => {
             thumb.classList.toggle('active', thumb.dataset.product === key);
         });
+
+        loadModel(product.modelUrl);
     }
 
     // Thumbnail click handlers
