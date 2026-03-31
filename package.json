@@ -11,17 +11,18 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "three": "^0.183.2",
     "@tweenjs/tween.js": "^23.1.3",
     "fflate": "^0.8.2",
-    "meshoptimizer": "^1.0.1"
+    "meshoptimizer": "^1.0.1",
+    "three": "^0.183.2"
   },
   "devDependencies": {
-    "vite": "^5.4.21",
-    "typescript": "^5.9.3",
-    "gh-pages": "^6.1.1",
     "@types/three": "^0.183.1",
+    "gh-pages": "^6.1.1",
     "postcss": "^8.5.8",
-    "rollup": "^4.59.0"
+    "rollup": "^4.59.0",
+    "sharp": "^0.34.5",
+    "typescript": "^5.9.3",
+    "vite": "^5.4.21"
   }
 }

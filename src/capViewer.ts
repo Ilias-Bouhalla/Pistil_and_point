@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import * as TWEEN from '@tweenjs/tween.js';
 
 // --- Product texture data ---
@@ -69,9 +70,13 @@ export function init3DViewer(): void {
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     container.insertBefore(renderer.domElement, container.firstChild);
 
+    // --- Environment setup (crucial for PBR materials) ---
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+
     // --- Lighting ---
     // Soft ambient
-    const ambientLight = new THREE.AmbientLight('#fff8f0', 0.8);
+    const ambientLight = new THREE.AmbientLight('#ffffff', 1.5);
     scene.add(ambientLight);
 
     // Key light (warm, from top-front-right)
@@ -185,9 +190,18 @@ export function init3DViewer(): void {
 
                 // Ensure meshes can cast and receive shadows
                 model.traverse((child) => {
-                    if ((child as THREE.Mesh).isMesh) {
-                        child.castShadow = true;
-                        child.receiveShadow = true;
+                    const mesh = child as THREE.Mesh;
+                    if (mesh.isMesh) {
+                        mesh.castShadow = true;
+                        mesh.receiveShadow = true;
+                        if (mesh.material) {
+                            // Ensure environment map affects the material correctly
+                            const mat = mesh.material as THREE.MeshStandardMaterial;
+                            if (mat.envMapIntensity !== undefined) {
+                                mat.envMapIntensity = 1.6;
+                            }
+                            mat.needsUpdate = true;
+                        }
                     }
                 });
 
@@ -226,9 +240,17 @@ export function init3DViewer(): void {
                       model.position.y += 0.2;
                       
                       model.traverse((child) => {
-                          if ((child as THREE.Mesh).isMesh) {
-                              child.castShadow = true;
-                              child.receiveShadow = true;
+                          const mesh = child as THREE.Mesh;
+                          if (mesh.isMesh) {
+                              mesh.castShadow = true;
+                              mesh.receiveShadow = true;
+                              if (mesh.material) {
+                                  const mat = mesh.material as THREE.MeshStandardMaterial;
+                                  if (mat.envMapIntensity !== undefined) {
+                                      mat.envMapIntensity = 1.6;
+                                  }
+                                  mat.needsUpdate = true;
+                              }
                           }
                       });
                       
@@ -284,6 +306,13 @@ export function init3DViewer(): void {
         });
 
         loadModel(product.modelUrl);
+
+        // Adjust exposure dynamically: the white cap needs more light
+        const targetExposure = key === 'white' ? 2.8 : 1.2;
+        new TWEEN.Tween(renderer)
+            .to({ toneMappingExposure: targetExposure }, 800)
+            .easing(TWEEN.Easing.Quadratic.Out)
+            .start();
     }
 
     // Thumbnail click handlers
