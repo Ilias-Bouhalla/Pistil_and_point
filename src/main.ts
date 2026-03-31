@@ -54,6 +54,7 @@ const translations: Record<string, Record<Lang, string>> = {
   nav_caps: { fr: 'CASQUETTES', en: 'CAPS' },
   nav_rugs: { fr: 'TAPIS', en: 'RUGS' },
   nav_process: { fr: 'PROCESSUS', en: 'PROCESS' },
+  nav_contact: { fr: 'CONTACT', en: 'CONTACT' },
   // About
   about_label: { fr: 'À PROPOS', en: 'ABOUT ME' },
   about_title_html: {
@@ -625,6 +626,51 @@ function initNavReveal(): void {
 }
 
 // ============================================
+// MOBILE MENU
+// ============================================
+function initMobileMenu(): void {
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  const overlay = document.getElementById('mobileMenuOverlay');
+  if (!menuBtn || !overlay) return;
+
+  function openMenu() {
+    menuBtn!.classList.add('open');
+    overlay!.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    menuBtn!.classList.remove('open');
+    overlay!.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  menuBtn.addEventListener('click', () => {
+    menuBtn.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  // Close when clicking a link
+  const mobileLinks = overlay.querySelectorAll<HTMLAnchorElement>('.mobile-nav-link');
+  mobileLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href')?.replace('#', '');
+      closeMenu();
+      setTimeout(() => {
+        const targetSection = document.getElementById(targetId || '');
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 350);
+    });
+  });
+
+  // Close on background click
+  const bg = overlay.querySelector('.mobile-menu-bg');
+  bg?.addEventListener('click', closeMenu);
+}
+
+// ============================================
 // TEXT SCRAMBLE EFFECT
 // ============================================
 function textScramble(element: HTMLElement, finalText: string): void {
@@ -678,6 +724,7 @@ async function init(): Promise<void> {
   initNavigation();
   initScrollProgress();
   initNavReveal();
+  initMobileMenu();
   initPixelFlowers();
   initFallingPetals();
   init3DViewer();

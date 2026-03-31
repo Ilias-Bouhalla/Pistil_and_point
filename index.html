@@ -564,7 +564,7 @@
 
   </main>
 
-  <!-- Bottom Navigation Bar -->
+  <!-- Bottom Navigation Bar (desktop) -->
   <nav class="bottom-nav" id="bottomNav">
     <div class="nav-brand-icon">🌸</div>
     <div class="nav-links">
@@ -578,6 +578,34 @@
       CONTACT <span>+</span>
     </a>
   </nav>
+
+  <!-- Mobile Menu Button -->
+  <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Ouvrir le menu">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-menu-bg"></div>
+    <nav class="mobile-menu-nav">
+      <div class="mobile-menu-brand">🌸 Pistil &amp; Point</div>
+      <ul class="mobile-menu-links">
+        <li><a href="#hero" class="mobile-nav-link" data-i18n="nav_home">ACCUEIL</a></li>
+        <li><a href="#about" class="mobile-nav-link" data-i18n="nav_about">À PROPOS</a></li>
+        <li><a href="#caps" class="mobile-nav-link" data-i18n="nav_caps">CASQUETTES</a></li>
+        <li><a href="#rugs" class="mobile-nav-link" data-i18n="nav_rugs">TAPIS</a></li>
+        <li><a href="#process" class="mobile-nav-link" data-i18n="nav_process">PROCESSUS</a></li>
+        <li><a href="#contact" class="mobile-nav-link mobile-nav-contact" data-i18n="nav_contact">CONTACT</a></li>
+      </ul>
+      <div class="mobile-menu-socials">
+        <a href="https://www.instagram.com/flowercap___/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@flowercap_" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.vinted.fr/member/3134572034" target="_blank" rel="noopener">Vinted</a>
+      </div>
+    </nav>
+  </div>
 
   <script type="module" src="/src/main.ts"></script>
 </body>

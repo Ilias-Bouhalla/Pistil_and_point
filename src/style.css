@@ -1732,6 +1732,161 @@ button {
 }
 
 /* ============================================
+   MOBILE HAMBURGER MENU
+   ============================================ */
+.mobile-menu-btn {
+  display: none;
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  z-index: 300;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(44, 36, 24, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 32px rgba(44,36,24,0.35);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-out-expo), background 0.3s ease;
+}
+
+.mobile-menu-btn.open {
+  background: rgba(122, 140, 110, 0.95);
+}
+
+.hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 2px;
+  transition: all 0.35s var(--ease-out-expo);
+  transform-origin: center;
+}
+
+.mobile-menu-btn.open .hamburger-line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.mobile-menu-btn.open .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.mobile-menu-btn.open .hamburger-line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.mobile-menu-overlay.open {
+  pointer-events: all;
+  visibility: visible;
+}
+
+.mobile-menu-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 18, 12, 0.97);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.mobile-menu-overlay.open .mobile-menu-bg {
+  opacity: 1;
+}
+
+.mobile-menu-nav {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 60px 40px;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: opacity 0.4s ease 0.1s, transform 0.4s var(--ease-out-expo) 0.1s;
+}
+
+.mobile-menu-overlay.open .mobile-menu-nav {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu-brand {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.1em;
+  margin-bottom: 48px;
+}
+
+.mobile-menu-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 48px;
+}
+
+.mobile-nav-link {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 8vw, 3rem);
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.04em;
+  padding: 8px 0;
+  transition: color 0.3s ease, transform 0.3s var(--ease-out-expo);
+  text-align: center;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:active {
+  color: var(--color-sage-light);
+  transform: translateX(8px);
+}
+
+.mobile-nav-contact {
+  color: var(--color-sage-light) !important;
+  margin-top: 8px;
+}
+
+.mobile-menu-socials {
+  display: flex;
+  gap: 32px;
+}
+
+.mobile-menu-socials a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.3);
+  transition: color 0.3s ease;
+}
+
+.mobile-menu-socials a:hover {
+  color: rgba(255,255,255,0.7);
+}
+
+/* ============================================
    SCROLL ANIMATIONS
    ============================================ */
 [data-animate="fade-up"] {
@@ -1845,19 +2000,26 @@ button {
 
 @media (max-width: 640px) {
   :root {
-    --section-padding: 80px;
+    --section-padding: 70px;
   }
 
+  /* === HERO === */
   .hero {
     padding: 30px 20px;
+    padding-top: 80px;
   }
 
   .hero-title {
-    font-size: clamp(2.5rem, 14vw, 5rem);
+    font-size: clamp(2rem, 13vw, 4.5rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
   }
 
   .hero-tagline {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
 
   .hero-cta-group {
@@ -1874,33 +2036,52 @@ button {
     display: none;
   }
 
+  /* === HIDE DESKTOP BOTTOM NAV === */
   .bottom-nav {
-    bottom: 16px;
-    padding: 6px;
-    gap: 4px;
+    display: none !important;
   }
 
-  .nav-brand-icon {
-    width: 36px;
-    height: 36px;
-    font-size: 1.1rem;
+  /* === SHOW HAMBURGER BUTTON === */
+  .mobile-menu-btn {
+    display: flex;
   }
 
-  .nav-link {
-    font-size: 0.6rem;
-    padding: 8px 10px;
+  /* === SECTIONS === */
+  .section-container {
+    padding: 0 20px;
   }
 
-  .nav-contact {
-    font-size: 0.6rem;
-    padding: 8px 14px;
+  .section-header {
+    margin-bottom: 48px;
   }
 
+  /* === ABOUT === */
   .about-stats {
-    flex-direction: column;
-    gap: 30px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
   }
 
+  .stat-number {
+    font-size: 2.2rem;
+  }
+
+  .about-socials {
+    justify-content: center;
+  }
+
+  /* === GALLERY === */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .project-card:nth-child(even) {
+    margin-top: 0;
+  }
+
+  /* === 3D VIEWER === */
   .product-selector {
     gap: 10px;
   }
@@ -1920,11 +2101,24 @@ button {
   }
 
   .viewer-container {
-    max-width: 300px;
+    max-width: 100%;
   }
 
-  .about-socials {
-    justify-content: center;
+  /* === PROCESS === */
+  .journal-item {
+    grid-template-columns: 36px 1fr 32px;
+    gap: 16px;
+    padding: 24px 0;
+  }
+
+  .journal-item-number {
+    font-size: 0.65rem;
+  }
+
+  /* === CONTACT === */
+  .contact-email {
+    font-size: 0.82rem;
+    word-break: break-all;
   }
 
   .contact-socials {
@@ -1932,6 +2126,7 @@ button {
     gap: 20px;
   }
 
+  /* === TOP BAR === */
   .lang-toggle {
     top: 16px;
     right: 16px;
@@ -1946,23 +2141,20 @@ button {
   }
 
   .top-brand-name {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
 
   .top-brand-icon {
     font-size: 0.9rem;
   }
 
-  /* Hide custom cursor on mobile */
+  /* === HIDE CURSOR === */
   .cursor-follower,
   .cursor-dot {
     display: none !important;
   }
 
-  html,
-  body,
-  a,
-  button {
+  html, body, a, button {
     cursor: auto;
   }
 }
