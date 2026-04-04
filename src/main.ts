@@ -82,7 +82,7 @@ const translations: Record<string, Record<Lang, string>> = {
   gallery_view: { fr: 'Voir les détails →', en: 'View Details →' },
   // Specific projects
   proj_cap1_cat: { fr: 'Hortensia Bleu • Broderie Main', en: 'Blue Hydrangea • Hand Embroidery' },
-  proj_cap2_cat: { fr: 'Rose Sauvage • Dentelle', en: 'Wild Rose • Lace' },
+  proj_cap2_cat: { fr: 'Fleurs Blanches • Perles', en: 'White Flowers • Pearls' },
   proj_rug1_cat: { fr: 'Coquelicots • Tapis Tufté', en: 'Poppies • Tufted Rug' },
   proj_rug2_cat: { fr: 'Pivoine Royale • Forme Découpée', en: 'Royal Peony • Shaped Rug' },
   proj_rug3_cat: { fr: 'Feuillage Tropical • Texture Laine', en: 'Tropical Foliage • Wool Texture' },
