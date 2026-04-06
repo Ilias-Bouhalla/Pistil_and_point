@@ -15,8 +15,8 @@
     href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&family=Silkscreen:wght@400;700&display=swap"
     rel="stylesheet" />
 
-  <script type="module" crossorigin src="/assets/index-DkwOT6hI.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-Cq2dWhrZ.css">
+  <script type="module" crossorigin src="/assets/index-CKORFQVe.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BXJ-DZcy.css">
 </head>
 
 <body>
@@ -33,9 +33,10 @@
   <!-- Falling petals canvas -->
   <canvas class="petals-canvas" id="petalsCanvas"></canvas>
 
-  <!-- Top header brand -->
   <a href="#hero" class="top-brand" id="topBrand">
-    <span class="top-brand-icon">🌸</span>
+    <div class="top-brand-logo">
+      <img src="/logo.png" alt="Pistil & Point Logo" />
+    </div>
     <span class="top-brand-name">Pistil & Point</span>
   </a>
 
@@ -47,19 +48,9 @@
 
   <!-- Loading screen -->
   <div class="loader" id="loader">
-    <div class="loader-floral">
-      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M100 0C100 0 120 60 100 100C80 60 100 0 100 0Z" fill="#7a8c6e" opacity="0.3" />
-        <path d="M200 100C200 100 140 120 100 100C140 80 200 100 200 100Z" fill="#7a8c6e" opacity="0.3" />
-        <path d="M100 200C100 200 80 140 100 100C120 140 100 200 100 200Z" fill="#7a8c6e" opacity="0.3" />
-        <path d="M0 100C0 100 60 80 100 100C60 120 0 100 0 100Z" fill="#7a8c6e" opacity="0.3" />
-        <path d="M29 29C29 29 75 50 100 100C50 75 29 29 29 29Z" fill="#c4878a" opacity="0.2" />
-        <path d="M171 29C171 29 125 50 100 100C150 75 171 29 171 29Z" fill="#c4878a" opacity="0.2" />
-        <path d="M171 171C171 171 125 150 100 100C150 125 171 171 171 171Z" fill="#c4878a" opacity="0.2" />
-        <path d="M29 171C29 171 75 150 100 100C50 125 29 171 29 171Z" fill="#c4878a" opacity="0.2" />
-        <circle cx="100" cy="100" r="12" fill="#c4a87c" opacity="0.5" />
-      </svg>
-    </div>
+      <div class="loader-floral-img">
+        <img src="/logo.png" alt="Loading..." />
+      </div>
     <div class="loader-text">
       <span class="loader-letter" style="--i:0">P</span>
       <span class="loader-letter" style="--i:1">i</span>
@@ -79,7 +70,7 @@
     <div class="loader-bar">
       <div class="loader-bar-fill" id="loaderBarFill"></div>
     </div>
-    <p class="loader-tagline" data-i18n="loader_tagline">Fait main avec amour 🌸</p>
+    <p class="loader-tagline" data-i18n="loader_tagline">Fait main avec amour <img src="/logo.png" class="text-logo" /></p>
   </div>
 
   <!-- Main content -->
@@ -197,25 +188,13 @@
     <!-- About Section -->
     <section class="section about-section" id="about">
       <div class="floral-corner-tl">
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0 Q30 80 10 150" stroke="#7a8c6e" stroke-width="0.8" fill="none" />
-          <path d="M10 150 Q-5 120 20 100" stroke="#7a8c6e" stroke-width="0.5" fill="none" />
-          <path d="M10 150 Q25 120 15 95" stroke="#7a8c6e" stroke-width="0.5" fill="none" />
-          <path d="M0 0 Q80 30 150 10" stroke="#c4878a" stroke-width="0.8" fill="none" />
-          <path d="M50 5 Q55 25 45 35" stroke="#7a8c6e" stroke-width="0.5" fill="none" />
-          <path d="M50 5 Q60 20 70 25" stroke="#7a8c6e" stroke-width="0.5" fill="none" />
-          <circle cx="8" cy="80" r="4" fill="#c4878a" opacity="0.1" />
-          <circle cx="80" cy="8" r="3" fill="#7a8c6e" opacity="0.1" />
-          <circle cx="40" cy="40" r="2" fill="#c4a87c" opacity="0.15" />
-          <path d="M25 60 Q30 55 28 48 Q32 55 38 57 Q32 58 28 65 Q27 58 22 57Z" fill="#c4878a" opacity="0.08" />
-          <path d="M70 30 Q73 25 72 20 Q75 25 80 26 Q75 28 72 33 Q71 28 68 26Z" fill="#7a8c6e" opacity="0.08" />
-        </svg>
+        <img src="/logo.png" class="logo-ornament" />
       </div>
 
       <div class="section-container">
         <div class="section-header" data-animate="fade-up">
           <span class="section-label" data-i18n="about_label">À PROPOS</span>
-          <h2 class="section-title" data-i18n="about_title_html">Salut, moi c'est Ili 🌷<br />l'artiste
+          <h2 class="section-title" data-i18n="about_title_html">Salut, moi c'est Ili <img src="/logo.png" class="text-logo" /><br />l'artiste
             derrière<br />Pistil & Point.</h2>
         </div>
         <div class="about-content" data-animate="fade-up">
@@ -283,12 +262,7 @@
       </div>
 
       <div class="floral-corner-br">
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0 Q30 80 10 150" stroke="#7a8c6e" stroke-width="0.8" fill="none" />
-          <path d="M0 0 Q80 30 150 10" stroke="#c4878a" stroke-width="0.8" fill="none" />
-          <circle cx="40" cy="40" r="2" fill="#c4a87c" opacity="0.15" />
-          <path d="M25 60 Q30 55 28 48 Q32 55 38 57 Q32 58 28 65 Q27 58 22 57Z" fill="#c4878a" opacity="0.08" />
-        </svg>
+        <img src="/logo.png" class="logo-ornament" />
       </div>
     </section>
 
@@ -332,18 +306,13 @@
     <!-- 3D Product Viewer Section -->
     <section class="section product-viewer-section" id="product-viewer">
       <div class="floral-corner-tl">
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0 Q30 80 10 150" stroke="#7a8c6e" stroke-width="0.8" fill="none" />
-          <path d="M0 0 Q80 30 150 10" stroke="#c4878a" stroke-width="0.8" fill="none" />
-          <circle cx="40" cy="40" r="2" fill="#c4a87c" opacity="0.15" />
-          <path d="M25 60 Q30 55 28 48 Q32 55 38 57 Q32 58 28 65 Q27 58 22 57Z" fill="#c4878a" opacity="0.08" />
-        </svg>
+        <img src="/logo.png" class="logo-ornament" />
       </div>
 
       <div class="section-container">
         <div class="section-header" data-animate="fade-up">
           <span class="section-label" data-i18n="product_label">PRODUIT</span>
-          <h2 class="section-title" data-i18n="product_title_html">Explorez la<br />collection. 🌿</h2>
+          <h2 class="section-title" data-i18n="product_title_html">Explorez la<br />collection. <img src="/logo.png" class="text-logo" /></h2>
         </div>
 
         <div class="product-viewer-wrapper" data-animate="fade-up">
@@ -360,18 +329,8 @@
 
           <div class="viewer-container" id="viewer3D">
             <div class="viewer-loading" id="viewerLoading">
-              <div class="viewer-floral-spinner">
-                <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M100 0C100 0 120 60 100 100C80 60 100 0 100 0Z" fill="#7a8c6e" opacity="0.3" />
-                  <path d="M200 100C200 100 140 120 100 100C140 80 200 100 200 100Z" fill="#7a8c6e" opacity="0.3" />
-                  <path d="M100 200C100 200 80 140 100 100C120 140 100 200 100 200Z" fill="#7a8c6e" opacity="0.3" />
-                  <path d="M0 100C0 100 60 80 100 100C60 120 0 100 0 100Z" fill="#7a8c6e" opacity="0.3" />
-                  <path d="M29 29C29 29 75 50 100 100C50 75 29 29 29 29Z" fill="#c4878a" opacity="0.2" />
-                  <path d="M171 29C171 29 125 50 100 100C150 75 171 29 171 29Z" fill="#c4878a" opacity="0.2" />
-                  <path d="M171 171C171 171 125 150 100 100C150 125 171 171 171 171Z" fill="#c4878a" opacity="0.2" />
-                  <path d="M29 171C29 171 75 150 100 100C50 125 29 171 29 171Z" fill="#c4878a" opacity="0.2" />
-                  <circle cx="100" cy="100" r="12" fill="#c4a87c" opacity="0.5" />
-                </svg>
+              <div class="viewer-logo-spinner">
+                <img src="/logo.png" alt="..." />
               </div>
             </div>
             <div class="viewer-drag-hint" id="viewerDragHint">
@@ -403,7 +362,7 @@
               </div>
               <div class="detail-item">
                 <span class="detail-label" data-i18n="product_craft">Fabrication</span>
-                <span class="detail-value" data-i18n="product_handmade">Fait main 🌸</span>
+                <span class="detail-value" data-i18n="product_craft">Fait main <img src="/logo.png" class="text-logo" /></span>
               </div>
             </div>
             <a href="https://pistilpoint.me" target="_blank" rel="noopener" class="product-buy-btn" data-magnetic
@@ -415,27 +374,19 @@
       </div>
 
       <div class="floral-corner-br">
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0 Q30 80 10 150" stroke="#7a8c6e" stroke-width="0.8" fill="none" />
-          <path d="M0 0 Q80 30 150 10" stroke="#c4878a" stroke-width="0.8" fill="none" />
-          <circle cx="40" cy="40" r="2" fill="#c4a87c" opacity="0.15" />
-        </svg>
+        <img src="/logo.png" class="logo-ornament" />
       </div>
     </section>
 
     <!-- Process Section -->
     <section class="section journal-section" id="process">
       <div class="floral-corner-tl">
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0 0 Q30 80 10 150" stroke="#7a8c6e" stroke-width="0.8" fill="none" />
-          <path d="M0 0 Q80 30 150 10" stroke="#c4878a" stroke-width="0.8" fill="none" />
-          <circle cx="40" cy="40" r="2" fill="#c4a87c" opacity="0.15" />
-        </svg>
+        <img src="/logo.png" class="logo-ornament" />
       </div>
       <div class="section-container">
         <div class="section-header" data-animate="fade-up">
           <span class="section-label" data-i18n="process_label">MON PROCESSUS</span>
-          <h2 class="section-title" data-i18n="process_title_html">Comment chaque<br />casquette<br />éclot. 🌱
+          <h2 class="section-title" data-i18n="process_title_html">Comment chaque<br />casquette<br />éclot. <img src="/logo.png" class="text-logo" />
           </h2>
         </div>
         <div class="journal-list">
@@ -447,7 +398,7 @@
                 parfaite — couleur, taille et tissu qui mettront en valeur le design floral imaginé.</p>
             </div>
             <div class="journal-item-date" data-i18n="process_step1_label">Sélection</div>
-            <div class="journal-item-arrow">🌿</div>
+            <div class="journal-item-arrow"><img src="/logo.png" class="text-logo" /></div>
           </a>
           <a href="#" class="journal-item" data-animate="fade-up">
             <div class="journal-item-number">02</div>
@@ -458,7 +409,7 @@
               </p>
             </div>
             <div class="journal-item-date" data-i18n="process_step2_label">Design</div>
-            <div class="journal-item-arrow">🌸</div>
+            <div class="journal-item-arrow"><img src="/logo.png" class="text-logo" /></div>
           </a>
           <a href="#" class="journal-item" data-animate="fade-up">
             <div class="journal-item-number">03</div>
@@ -468,7 +419,7 @@
                 la main, fixation des appliqués en dentelle et ajout des perles pour donner vie à la casquette.</p>
             </div>
             <div class="journal-item-date" data-i18n="process_step3_label">Création</div>
-            <div class="journal-item-arrow">🌺</div>
+            <div class="journal-item-arrow"><img src="/logo.png" class="text-logo" /></div>
           </a>
         </div>
       </div>
@@ -476,28 +427,18 @@
 
     <!-- Contact Section -->
     <section class="section contact-section" id="contact">
-      <div class="floral-decoration" style="top: 20px; right: 40px; width: 200px; height: 200px; opacity: 0.04;">
-        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M100 20 Q110 60 100 100 Q90 60 100 20Z" stroke="#a8b89c" stroke-width="1" fill="none" />
-          <path d="M180 100 Q140 110 100 100 Q140 90 180 100Z" stroke="#a8b89c" stroke-width="1" fill="none" />
-          <path d="M100 180 Q90 140 100 100 Q110 140 100 180Z" stroke="#e8b4b6" stroke-width="1" fill="none" />
-          <path d="M20 100 Q60 90 100 100 Q60 110 20 100Z" stroke="#e8b4b6" stroke-width="1" fill="none" />
-          <circle cx="100" cy="100" r="6" fill="#c4a87c" opacity="0.15" />
-        </svg>
+      <div class="floral-decoration logo-ornament-dec" style="top: 20px; right: 40px; width: 200px; height: 200px;">
+        <img src="/logo.png" alt="" />
       </div>
-      <div class="floral-decoration" style="bottom: 40px; left: 60px; width: 150px; height: 150px; opacity: 0.03;">
-        <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M75 10 Q85 45 75 75 Q65 45 75 10Z" stroke="#a8b89c" stroke-width="0.8" fill="none" />
-          <path d="M140 75 Q105 85 75 75 Q105 65 140 75Z" stroke="#a8b89c" stroke-width="0.8" fill="none" />
-          <circle cx="75" cy="75" r="4" fill="#e8b4b6" opacity="0.1" />
-        </svg>
+      <div class="floral-decoration logo-ornament-dec" style="bottom: 40px; left: 60px; width: 150px; height: 150px;">
+        <img src="/logo.png" alt="" />
       </div>
 
       <div class="section-container">
         <div class="contact-content" data-animate="fade-up">
           <span class="section-label" data-i18n="contact_label">CONTACT</span>
           <h2 class="contact-title" data-i18n="contact_title_html">Créons quelque<br />chose
-            de<br />magnifique. 🌸</h2>
+            de<br />magnifique. <img src="/logo.png" class="text-logo" /></h2>
           <p class="contact-subtitle" data-i18n="contact_subtitle">Envie d'une création personnalisée ? Un projet de
             tapis ou de casquette ? Contactez-moi et faisons éclore votre idée !</p>
           <a href="mailto:contact.pistilpoint@gmail.com" class="contact-email"
@@ -518,7 +459,9 @@
 
   <!-- Bottom Navigation Bar (desktop) -->
   <nav class="bottom-nav" id="bottomNav">
-    <div class="nav-brand-icon">🌸</div>
+    <div class="nav-brand-logo">
+      <img src="/logo.png" alt="P&P Logo" />
+    </div>
     <div class="nav-links">
       <a href="#hero" class="nav-link active" data-section="hero" data-i18n="nav_home">ACCUEIL</a>
       <a href="#about" class="nav-link" data-section="about" data-i18n="nav_about">À PROPOS</a>
@@ -542,7 +485,10 @@
   <div class="mobile-menu-overlay" id="mobileMenuOverlay">
     <div class="mobile-menu-bg"></div>
     <nav class="mobile-menu-nav">
-      <div class="mobile-menu-brand">🌸 Pistil &amp; Point</div>
+      <div class="mobile-menu-brand">
+        <img src="/logo.png" alt="Pistil & Point Logo" class="mobile-logo" />
+        Pistil &amp; Point
+      </div>
       <ul class="mobile-menu-links">
         <li><a href="#hero" class="mobile-nav-link" data-i18n="nav_home">ACCUEIL</a></li>
         <li><a href="#about" class="mobile-nav-link" data-i18n="nav_about">À PROPOS</a></li>
