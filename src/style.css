@@ -40,6 +40,15 @@
   --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
 }
 
+.text-logo {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: middle;
+  margin: 0 4px;
+  object-fit: contain;
+}
+
 /* --- Reset --- */
 *,
 *::before,
@@ -175,9 +184,21 @@ button {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-.top-brand-icon {
-  font-size: 1.1rem;
-  line-height: 1;
+.top-brand-logo {
+  width: 28px;
+  height: 28px;
+  background: var(--color-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.top-brand-logo img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
 }
 
 .top-brand-name {
@@ -340,8 +361,27 @@ button {
   width: 300px;
   height: 300px;
   pointer-events: none;
-  opacity: 0.07;
+  opacity: 0.1;
   z-index: 0;
+}
+
+.logo-ornament {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(1) brightness(0.8);
+  opacity: 0.4;
+}
+
+.logo-ornament-dec {
+  opacity: 0.05 !important;
+  filter: grayscale(1);
+}
+
+.logo-ornament-dec img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .floral-corner-br {
@@ -351,7 +391,7 @@ button {
   width: 250px;
   height: 250px;
   pointer-events: none;
-  opacity: 0.07;
+  opacity: 0.1;
   z-index: 0;
   transform: rotate(180deg);
 }
@@ -400,12 +440,18 @@ button {
   pointer-events: none;
 }
 
-.loader-floral {
+.loader-floral-img {
   position: absolute;
   width: 120px;
   height: 120px;
-  opacity: 0.1;
+  opacity: 0.15;
   animation: floralSpin 20s linear infinite;
+}
+
+.loader-floral-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 @keyframes floralSpin {
@@ -1271,15 +1317,17 @@ button {
   opacity: 0;
 }
 
-.viewer-floral-spinner {
+.viewer-logo-spinner {
   width: 60px;
   height: 60px;
+  opacity: 0.2;
   animation: spinFlower 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-.viewer-floral-spinner svg {
+.viewer-logo-spinner img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 
 @keyframes spinFlower {
@@ -1665,17 +1713,22 @@ button {
   transform: translateX(-50%) translateY(0);
 }
 
-.nav-brand-icon {
+.nav-brand-logo {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  flex-shrink: 0;
+  background: var(--color-white);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
-  background: linear-gradient(135deg, rgba(122, 140, 110, 0.2), rgba(196, 135, 138, 0.2));
-  border: 2px solid rgba(122, 140, 110, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.nav-brand-logo img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
 }
 
 .nav-links {
@@ -1828,12 +1881,26 @@ button {
   transform: translateY(0);
 }
 
+.mobile-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  background: var(--color-white);
+  border-radius: 50%;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
 .mobile-menu-brand {
   font-family: var(--font-display);
   font-size: 1rem;
   color: rgba(255,255,255,0.35);
   letter-spacing: 0.1em;
   margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
 .mobile-menu-links {
@@ -2140,12 +2207,13 @@ button {
     padding: 6px 14px;
   }
 
-  .top-brand-name {
-    font-size: 0.65rem;
+  .top-brand-logo {
+    width: 24px;
+    height: 24px;
   }
 
-  .top-brand-icon {
-    font-size: 0.9rem;
+  .top-brand-name {
+    font-size: 0.65rem;
   }
 
   /* === HIDE CURSOR === */
