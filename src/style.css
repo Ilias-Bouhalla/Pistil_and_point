@@ -785,19 +785,6 @@ button {
   box-shadow: 0 8px 30px rgba(122, 140, 110, 0.35);
 }
 
-.hero-cta svg {
-  transition: transform 0.3s var(--ease-out-expo);
-}
-
-/* Arrow right for Vinted (now primary color-wise but secondary class) and arrow down for Discover */
-.hero-cta-primary:hover svg {
-  transform: translateY(3px);
-}
-
-.hero-cta-secondary:hover svg {
-  transform: translateX(4px) translateY(0);
-}
-
 /* Hero Scroll Indicator */
 .hero-scroll-indicator {
   position: absolute;
