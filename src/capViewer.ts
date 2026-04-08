@@ -65,7 +65,7 @@ export function init3DViewer(): void {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
+    renderer.toneMappingExposure = 2.0; // Increased from 1.2
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     container.insertBefore(renderer.domElement, container.firstChild);
@@ -80,7 +80,7 @@ export function init3DViewer(): void {
     scene.add(ambientLight);
 
     // Key light (warm, from top-front-right)
-    const keyLight = new THREE.DirectionalLight('#fffaf0', 1.5);
+    const keyLight = new THREE.DirectionalLight('#fffaf0', 2.2); // Increased from 1.5
     keyLight.position.set(3, 5, 4);
     keyLight.castShadow = true;
     keyLight.shadow.mapSize.setScalar(2048);
@@ -198,7 +198,7 @@ export function init3DViewer(): void {
                             // Ensure environment map affects the material correctly
                             const mat = mesh.material as THREE.MeshStandardMaterial;
                             if (mat.envMapIntensity !== undefined) {
-                                mat.envMapIntensity = 1.6;
+                                mat.envMapIntensity = 2.5; // Increased from 1.6
                             }
                             mat.needsUpdate = true;
                         }
@@ -247,7 +247,7 @@ export function init3DViewer(): void {
                               if (mesh.material) {
                                   const mat = mesh.material as THREE.MeshStandardMaterial;
                                   if (mat.envMapIntensity !== undefined) {
-                                      mat.envMapIntensity = 1.6;
+                                      mat.envMapIntensity = 2.5; // Increased from 1.6
                                   }
                                   mat.needsUpdate = true;
                               }
@@ -308,7 +308,7 @@ export function init3DViewer(): void {
         loadModel(product.modelUrl);
 
         // Adjust exposure dynamically: the white cap needs more light
-        const targetExposure = key === 'white' ? 2.8 : 1.2;
+        const targetExposure = key === 'white' ? 3.5 : 2.0; // Boosted both
         new TWEEN.Tween(renderer)
             .to({ toneMappingExposure: targetExposure }, 800)
             .easing(TWEEN.Easing.Quadratic.Out)
@@ -320,6 +320,20 @@ export function init3DViewer(): void {
         thumb.addEventListener('click', () => {
             const key = thumb.dataset.product || 'blue';
             switchProduct(key);
+        });
+    });
+
+    // --- Gallery card click handlers ---
+    const galleryCards = document.querySelectorAll<HTMLElement>('.project-card');
+    galleryCards.forEach((card) => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => {
+            // Prevent interference with other links if any were to be added inside
+            const key = card.dataset.product;
+            if (key) {
+                switchProduct(key);
+                document.getElementById('product-viewer')?.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 
