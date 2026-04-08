@@ -759,24 +759,13 @@ button {
 }
 
 .hero-cta-primary {
-  background: linear-gradient(135deg, var(--color-sage), var(--color-sage-light));
-  color: var(--color-white);
-  box-shadow: 0 4px 20px rgba(122, 140, 110, 0.25);
-}
-
-.hero-cta-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(122, 140, 110, 0.35);
-}
-
-.hero-cta-secondary {
   background: transparent;
   color: var(--color-text);
   border: 1px solid var(--color-border);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.hero-cta-secondary:hover {
+.hero-cta-primary:hover {
   background: var(--color-text);
   color: var(--color-white);
   border-color: var(--color-text);
@@ -784,11 +773,24 @@ button {
   box-shadow: 0 8px 24px rgba(44, 36, 24, 0.2);
 }
 
+.hero-cta-secondary {
+  background: linear-gradient(135deg, var(--color-sage), var(--color-sage-light));
+  color: var(--color-white);
+  box-shadow: 0 4px 20px rgba(122, 140, 110, 0.25);
+  border: none;
+}
+
+.hero-cta-secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(122, 140, 110, 0.35);
+}
+
 .hero-cta svg {
   transition: transform 0.3s var(--ease-out-expo);
 }
 
-.hero-cta:hover svg {
+/* Arrow right for Vinted (now primary color-wise but secondary class) and arrow down for Discover */
+.hero-cta-primary:hover svg {
   transform: translateY(3px);
 }
 
